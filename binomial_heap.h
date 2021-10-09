@@ -7,7 +7,7 @@ using namespace std;
 struct node
 {
     int val;
-    vector<node*>* ptrs;
+    vector<node*>* childPtrs;
 };
 
 class binomial_heap
@@ -18,7 +18,7 @@ private:
 public:
     binomial_heap();
     ~binomial_heap();
-    void insert(int);
+    void inserting(int);
     int find();
     void merge();
 };

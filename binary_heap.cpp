@@ -66,6 +66,3 @@ void *BinaryHeap::merge(BinaryHeap &h1)
     }
     return merged;
 }
-
-h3 = h1 + h2
-h1 = h1 + h2

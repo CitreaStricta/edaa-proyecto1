@@ -7,6 +7,17 @@ using namespace std;
 
 int main()
 {
+    binomial_heap* bmlh = new binomial_heap();
+    bmlh->inserting(0);
+    bmlh->inserting(1);
+    bmlh->inserting(2);
+    bmlh->inserting(3);
+    bmlh->inserting(4);
+
+
+
+    return 0;
+
     cout << "elmankk la maska" << endl;
     BinaryHeap* bh1 = new BinaryHeap();
     BinaryHeap* bh2 = new BinaryHeap();
