@@ -8,18 +8,27 @@ using namespace std;
 int main()
 {
     srand(time(NULL));
-    binomial_heap* bmlh = new binomial_heap();
+    binomial_heap* bnmlh1 = new binomial_heap();
 
     for (int i = 0; i < 63; i++)
     {
-        bmlh->insert(rand() % 1000);
+        bnmlh1->insert(rand() % 1000);
     }
-    bmlh->printBinomialH();
+    bnmlh1->printBinomialH();
 
-    cout << "El menor valor es: " << bmlh->find() << endl;
+    cout << "El menor valor es: " << bnmlh1->find() << endl;
 
+    binomial_heap* bnmlh2 = new binomial_heap();
 
+    for (int i = 0; i < 63; i++)
+    {
+        bnmlh2->insert(rand() % 1000);
+    }
+    bnmlh2->printBinomialH();
 
+    bnmlh1->merge(bnmlh2);
+
+    cout << "El menor valor es: " << bnmlh2->find() << endl;
     return 0;
 
     cout << "elmankk la maska" << endl;

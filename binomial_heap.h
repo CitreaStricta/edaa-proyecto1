@@ -14,13 +14,14 @@ class binomial_heap
 {
 private:
     vector<node*>* _arrRoots;
-    void _insertSpecific(int indice, node* nNode);
+    void _insertSpecific(int, node*);
+    vector<node*>* _getRoots();
 public:
     binomial_heap();
     ~binomial_heap();
     void insert(int);
     int find();
-    void merge();
+    void merge(binomial_heap*);
     void printBinomialH();
 };
 

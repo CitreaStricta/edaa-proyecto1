@@ -12,27 +12,13 @@ binomial_heap::~binomial_heap()
     // el delete de esto va a ser una real paja
 }
 
-void binomial_heap::insert(int val)
-{
-    node* handlerPtr = new node();
-    handlerPtr->val = val;
-    handlerPtr->childPtrs = new vector<node*>();
-    _insertSpecific(0, handlerPtr);
-}
+
 
 // funcion recursiva para insertar elementos
 void binomial_heap::_insertSpecific(int indice, node* handlerPtr)
 {
-    // vector<node*>::iterator it;
-    // it = _arrRoots->begin();
     // si en los punteros a raices no hay un puntero en [indice], lo creo
-    if (_arrRoots->size() == indice)
-    {
-        //creo el puntero y lo inicializo en nullptr
-        node* newPtrNode = nullptr;
-        //lo meto al arreglo de raices
-        _arrRoots->push_back(/*newPtrNode*/nullptr); // puedo?????
-    }
+    if (_arrRoots->size() == indice) _arrRoots->push_back(nullptr);
 
     // insercion del nuevo nodo en el arreglo de las raices
     // if no hay un nodo en indice. Es decir, si el ptr [indice] en _arrRoots == nullptr
@@ -40,7 +26,6 @@ void binomial_heap::_insertSpecific(int indice, node* handlerPtr)
     {// meto el nodo en ese espacio y retorno
         _arrRoots->at(indice) = handlerPtr;
         handlerPtr = nullptr;
-        //return;
     }
     else
     {// si hay un nodo en ese indice entonces hay que revisar cual tiene el menor valor
@@ -57,7 +42,6 @@ void binomial_heap::_insertSpecific(int indice, node* handlerPtr)
             // de raices que le corresponde segun su orden.
             _insertSpecific(indice + 1, handlerPtr);
             handlerPtr = nullptr;
-            //return;
         }
         else // nodo nuevo es menor
         {
@@ -71,10 +55,18 @@ void binomial_heap::_insertSpecific(int indice, node* handlerPtr)
             // de raices que le corresponde segun su orden
             _insertSpecific(indice + 1, handlerPtr);
             handlerPtr = nullptr;
-            //return;
         }
     }
     //return;
+}
+
+void binomial_heap::insert(int val)
+{
+    node* handlerPtr = new node();
+    handlerPtr->val = val;
+    handlerPtr->childPtrs = new vector<node*>();
+    auto it = _arrRoots->begin();
+    _insertSpecific(0, handlerPtr);
 }
 
 int binomial_heap::find()
@@ -93,8 +85,10 @@ int binomial_heap::find()
     return min;
 }
 
-void binomial_heap::merge()
+// merge de los dos heaps en heap1
+void binomial_heap::merge(binomial_heap* bin2)
 {
+    auto it1 = bin2->_getRoots();
     
 }
 
@@ -133,4 +127,9 @@ void _printHeap(vector<node*>* s)
 void binomial_heap::printBinomialH()
 {
     _printHeap(_arrRoots);
+}
+
+vector<node*>* binomial_heap::_getRoots()
+{
+    return _arrRoots;
 }
