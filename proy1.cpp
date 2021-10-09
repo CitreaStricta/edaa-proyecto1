@@ -23,6 +23,7 @@ int main()
     bh2->insert(7);
     bh2->insert(3);
     
+    cout << "hola" << endl;
 
     hey = bh1->getArray();
     for(int i=0; i<hey.size(); i++)
