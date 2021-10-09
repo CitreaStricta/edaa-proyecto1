@@ -18,10 +18,10 @@ private:
 public:
     binomial_heap();
     ~binomial_heap();
-    void inserting(int);
+    void insert(int);
     int find();
     void merge();
-    void printBnlH();
+    void printBinomialH();
 };
 
 #endif

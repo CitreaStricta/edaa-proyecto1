@@ -12,7 +12,7 @@ binomial_heap::~binomial_heap()
     // el delete de esto va a ser una real paja
 }
 
-void binomial_heap::inserting(int val)
+void binomial_heap::insert(int val)
 {
     node* handlerPtr = new node();
     handlerPtr->val = val;
@@ -23,8 +23,8 @@ void binomial_heap::inserting(int val)
 // funcion recursiva para insertar elementos
 void binomial_heap::_insertSpecific(int indice, node* handlerPtr)
 {
-    vector<node*>::iterator it;
-    it = _arrRoots->begin();
+    // vector<node*>::iterator it;
+    // it = _arrRoots->begin();
     // si en los punteros a raices no hay un puntero en [indice], lo creo
     if (_arrRoots->size() == indice)
     {
@@ -79,9 +79,18 @@ void binomial_heap::_insertSpecific(int indice, node* handlerPtr)
 
 int binomial_heap::find()
 {
-
-
-    return -1; // -1 para que el compilador no tire warning
+    auto it = _arrRoots->begin();
+    auto itE = _arrRoots->end();
+    int min = INT32_MAX;
+    while (it != itE)
+    {
+        if ((*it) != nullptr && (*it)->val < min)
+        {
+            min = (*it)->val;
+        }
+        it++;
+    }
+    return min;
 }
 
 void binomial_heap::merge()
@@ -89,44 +98,39 @@ void binomial_heap::merge()
     
 }
 
-void intingTree(vector<node*>* s)
+void _printTree(vector<node*>* s)
 {
     auto itP = s->begin();
 
     while (itP != s->end())
     {
-        cout << (*itP)->val << endl;
-        intingTree((*itP)->childPtrs);
+        cout << (*itP)->val << " ";
+        _printTree((*itP)->childPtrs);
         itP++;
     }
 
 }
 
-void inting(vector<node*>* s,  int k)
+void _printHeap(vector<node*>* s)
 {
+    int k = 0;
     auto itP = s->begin();
 
     while (itP != s->end())
     {
-        if ((*itP) == nullptr)
+        cout << "arbol con orden " << k << endl;
+        if ((*itP) != nullptr)
         {
-            cout << "raiz nula " << k << endl;
-            itP++;
-            k++;
+            cout << (*itP)->val << "  ";
+            _printTree((*itP)->childPtrs);
+            cout << endl;
         }
-        else
-        {
-            cout << "arbol con orden " << k << endl;
-            cout << (*itP)->val << endl;
-            intingTree((*itP)->childPtrs);
-            itP++;
-            k++;
-        }
+        itP++;
+        k++;
     }
 }
 
-
-void binomial_heap::printBnlH()
+void binomial_heap::printBinomialH()
 {
-    inting(_arrRoots, 0);
+    _printHeap(_arrRoots);
 }

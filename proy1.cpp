@@ -7,20 +7,18 @@ using namespace std;
 
 int main()
 {
+    srand(time(NULL));
     binomial_heap* bmlh = new binomial_heap();
-    bmlh->inserting(0);
-    bmlh->inserting(1);
-    bmlh->inserting(2);
-    bmlh->inserting(3);
-    bmlh->inserting(4);
-    bmlh->inserting(10);
-    bmlh->inserting(3);
-    bmlh->inserting(20);
-    bmlh->inserting(5);
-    bmlh->inserting(13);
-    bmlh->inserting(50);
-    bmlh->inserting(212);
-    bmlh->printBnlH();
+
+    for (int i = 0; i < 63; i++)
+    {
+        bmlh->insert(rand() % 1000);
+    }
+    bmlh->printBinomialH();
+
+    cout << "El menor valor es: " << bmlh->find() << endl;
+
+
 
     return 0;
 
