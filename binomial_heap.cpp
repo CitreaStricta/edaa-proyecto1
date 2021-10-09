@@ -23,6 +23,8 @@ void binomial_heap::inserting(int val)
 // funcion recursiva para insertar elementos
 void binomial_heap::_insertSpecific(int indice, node* handlerPtr)
 {
+    vector<node*>::iterator it;
+    it = _arrRoots->begin();
     // si en los punteros a raices no hay un puntero en [indice], lo creo
     if (_arrRoots->size() == indice)
     {
@@ -87,3 +89,44 @@ void binomial_heap::merge()
     
 }
 
+void intingTree(vector<node*>* s)
+{
+    auto itP = s->begin();
+
+    while (itP != s->end())
+    {
+        cout << (*itP)->val << endl;
+        intingTree((*itP)->childPtrs);
+        itP++;
+    }
+
+}
+
+void inting(vector<node*>* s,  int k)
+{
+    auto itP = s->begin();
+
+    while (itP != s->end())
+    {
+        if ((*itP) == nullptr)
+        {
+            cout << "raiz nula " << k << endl;
+            itP++;
+            k++;
+        }
+        else
+        {
+            cout << "arbol con orden " << k << endl;
+            cout << (*itP)->val << endl;
+            intingTree((*itP)->childPtrs);
+            itP++;
+            k++;
+        }
+    }
+}
+
+
+void binomial_heap::printBnlH()
+{
+    inting(_arrRoots, 0);
+}

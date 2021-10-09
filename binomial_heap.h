@@ -21,6 +21,7 @@ public:
     void inserting(int);
     int find();
     void merge();
+    void printBnlH();
 };
 
 #endif

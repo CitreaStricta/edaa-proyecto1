@@ -13,8 +13,14 @@ int main()
     bmlh->inserting(2);
     bmlh->inserting(3);
     bmlh->inserting(4);
-
-
+    bmlh->inserting(10);
+    bmlh->inserting(3);
+    bmlh->inserting(20);
+    bmlh->inserting(5);
+    bmlh->inserting(13);
+    bmlh->inserting(50);
+    bmlh->inserting(212);
+    bmlh->printBnlH();
 
     return 0;
 
