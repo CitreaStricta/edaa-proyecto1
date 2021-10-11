@@ -7,26 +7,34 @@ using namespace std;
 
 FibonacciHeap::FibonacciHeap(){
 	roots = 0;
-	//start = new fiNode; //Para tener una referencia a la circular doubly linked list
-	//start = NULL;
-	min = new fiNode; //Se debe mantener una referencia al nodo menor
-	min = NULL;
 }
 
 FibonacciHeap::~FibonacciHeap(){
-	//delete start;
-	delete min;
+	if(min!=nullptr){
+		fiNode *temp, *actual;
+		if(min == nullptr)
+			return;
+		actual = min->sig;
+		while(actual!=min){
+			temp = actual->sig;
+			actual->sig = nullptr;
+			actual->prev = nullptr;
+			delete actual;
+			actual = temp;
+		}
+		min->sig = nullptr;
+		min->prev = nullptr;
+		delete min;
+	}
 }
 
 void FibonacciHeap::insert(const int num){
-	struct fiNode* nuevo = new fiNode;
+	fiNode *nuevo = new fiNode;
 	nuevo->tree.push_back(num);
 	if(roots==0){
 		nuevo->prev = nuevo;
 		nuevo->sig = nuevo;
 		min = nuevo;
-		//start = nuevo;
-		//cerr<<"me caigo"<<endl;
 		roots++;
 		return;
 	}
@@ -43,26 +51,44 @@ void FibonacciHeap::insert(const int num){
 	min->sig = nuevo; //Finalmente, el nuevo nodo tiene como puntero al siguiente, el primer nodo
 	if(nuevo->tree[0]<min->tree[0])
 		min = nuevo;
+	
 	roots++;
+	//nuevo->sig = nullptr;
+	//nuevo->prev = nullptr;
+	//free(nuevo);
 	return;
 }
 
 int FibonacciHeap::searchMin(){
+	if(min == nullptr){
+		cout<<"no tengo nada"<<endl;
+		return -1;
+	}
 	return min->tree[0];
 }
 
-void FibonacciHeap::merge(FibonacciHeap &f1){
+void FibonacciHeap::merge(FibonacciHeap* f1){
 	//La idea es tomar la raiz del nuevo fibonacci heap (f1), e insertarla en la circular doubly linked list 
 	//del fibonacci heap actual (this)
-	struct fiNode* minF1 = f1.getList();
-	struct fiNode* lastF1 = minF1->prev;
+	fiNode* minF1 = f1->getList();
+	fiNode* lastF1 = minF1->prev;
 	min->prev->sig = minF1;
 	lastF1->sig = min;
 	minF1->prev = min->prev;
 	min->prev = lastF1;
 
-	if(minF1->tree[0] < min->tree[0])
+	auto ppmin = f1->_getList();
+	if(minF1->tree[0] < min->tree[0]){
 		min = minF1;
+		(*ppmin) = nullptr;
+	}else{
+		(*ppmin) = nullptr;
+	}
+}
+
+struct fiNode** FibonacciHeap::_getList(){
+	auto PPmin = &min;
+	return PPmin;
 }
 
 struct fiNode* FibonacciHeap::getList(){

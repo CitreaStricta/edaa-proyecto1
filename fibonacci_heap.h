@@ -19,13 +19,13 @@ class FibonacciHeap{
 		~FibonacciHeap();
 		void insert(const int num);
 		int searchMin();
-		void merge(FibonacciHeap &f1);
+		void merge(FibonacciHeap* f1);
 		struct fiNode* getList();
 	private:
+		fiNode** _getList();
 		void heapify(struct fiNode x);
 		vector<int> vec;
 		int roots;
-		struct fiNode* start;
 		struct fiNode* min;
 };
 

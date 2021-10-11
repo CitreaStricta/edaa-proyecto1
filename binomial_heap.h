@@ -15,6 +15,7 @@ class binomial_heap
 private:
     vector<node*>* _arrRoots;
     void _insertSpecific(int, node*);
+    void _recursiveDelete(node*);
 public:
     binomial_heap();
     ~binomial_heap();

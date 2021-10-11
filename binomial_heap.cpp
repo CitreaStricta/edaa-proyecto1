@@ -5,11 +5,37 @@ binomial_heap::binomial_heap()
     _arrRoots = new vector<node*>();
 }
 
+
 binomial_heap::~binomial_heap()
 {
+    node* handlerPtr = nullptr;
+    for (int i = 0; i < _arrRoots->size(); i++)
+    {
+        if (_arrRoots->at(i) != nullptr)
+        {
+            handlerPtr = _arrRoots->at(i);
+            _recursiveDelete(handlerPtr);
+            _arrRoots->at(i) = nullptr;
+            handlerPtr = nullptr;
+        }
+    }
+    
     delete _arrRoots;
-    // faltan los delete para los nodos en el array (y los de cada nodo)
-    // el delete de esto va a ser una real paja
+}
+
+void binomial_heap::_recursiveDelete(node* handlerPtr)
+{
+    node* thisNode = handlerPtr;
+    for (int i = 0; i < thisNode->childPtrs->size(); i++)
+    { // si no hay punteros en el vector, no entra aqui
+        handlerPtr = thisNode->childPtrs->at(i);
+        _recursiveDelete(handlerPtr);
+        thisNode->childPtrs->at(i) = nullptr; // desreferencio por seguridad
+        handlerPtr == nullptr; // desreferencio por seguridad
+    }
+    delete thisNode->childPtrs; // borro el vector de punteros del nodo
+    thisNode->childPtrs = nullptr; // desreferencio el puntero al vector por seguridad
+    delete thisNode; // borro el nodo
 }
 
 // funcion recursiva para insertar elementos
@@ -91,7 +117,7 @@ void binomial_heap::merge(binomial_heap* bin2)
     auto binomial_ToMerge = bin2->_get_PtrToRoots();
 
     for (int i = 0; i < binomial_ToMerge->size(); i++)
-    {
+    {// si no entra aqui, no hay elementos para hacer merge
         if (binomial_ToMerge->at(i) != nullptr)
         {
             handlerPtr = binomial_ToMerge->at(i);
