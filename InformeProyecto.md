@@ -37,24 +37,69 @@ Donde n y m representan el número de nodos de cada binary heap que forma parte 
 
 ## Binomial Heap
 
+De manera similar a Binary Heap, un Binomial Heap es una estructura de datos que actúa como cola de prioridad y que además permite la unión de pares de heaps. Análogo a binary heap que toma la forma de un árbol binario completo, un binomial heap toma la forma de otro tipo de árbol, un binomial tree. Otra gran diferencia es que un Binomial Heap es un bosque de binomial trees y está definido de manera recursiva:
 
+* Un binomial tree de orden 0 es un único nodo
+* Un binomial tree de orden $k$ tienen una raiz cuyos hijos son binomial trees de órdenes $k-1, k-2, ..., 2, 1, 0$.
+
+![alt image](500px-Binomial_Trees.svg.png "Binomial Heap") 
+
+Notemos además que podemos construir un binomial tree de orden k a partir de dos binomial tree de orden k-1. Simplemente tenemos que agregar un de los árboles como el hijo izquierdo de la raíz del otro árbol. Esta propiedad resulta de vital importancia a la hora de implementar la operación de unión.
+
+![alt image](200px-Binomial_heap_merge1.svg.png "Unión de dos Binomial Heap")
 
 ### Implementación Binomial Heap
 
-Para implementar un binary heap uilizamos un arreglo. Al ser binary heap siempre un árbol binario completo no hay necesidad de utilizar punteros y lo almacenamos de manera compacta. Para acceder a los hijos de un nodo particular, lo haremos mediante un par de operaciones aritméticas sobre el índice del padre. Lo mismo podemos hacer para encontrar el padre. Suponiendo que el arreglo está indexado en 0, las relaciones son las siguientes:
+Para implementar binomial heap utilizando el menor espacio posible, creamos la estructura `node`. Cada `node` se compone de su propio valor y de un vector con las referencias a los `nodes` hijos. Esto nos permite definir recursivamente los árboles binomiales independiente del orden que tengan. Como es lógico, para representar el Binomial Heap creamos un vector con referencias a cada uno de estos árboles. El índice de cada objeto de este vector se corresponde con el grado del árbol binomial. 
 
-* Índice del Hijo derecho: $2i +2$
-* Índice del Hijo izquierdo: $2i + 1$
-* Índice del Padre: $\bigl\lfloor\frac{i-1}{2}\bigr\rfloor$
+```cpp
+struct node
+{
+    int val;
+    vector<node*>* childPtrs;
+};
+```
+
+Para despejar dudas vamos ejemplificar usando imágenes el comportamiento de nuestra estructura de datos. Supongamos que tenemos nuestro binomial heap vacío y queremos insertar los números 1 y 2. El primer paso es convertir el número 1 en `node`, como se muestra: `node` tiene valor 1 y apunta a `null`, porque no tiene hijos.
+
+![alt image](nodounicobinomial.svg)
+
+Hacemos lo propio para 2, pero al insertar nos damos cuenta que tenemos que generar el árbol binomial de orden 1. Aquí es donde entra en juego el segundo miembro de `node`, el vector de punteros. Aún parecerá innecesario, pero más adelante demostraremos que su uso es ventajoso.
+
+![alt image](nodounicobinomial2.svg)
+
+Así el árbol binomial de orden 1 nos queda
+
+![alt image](binomialk1_12.svg)
+
+y nuestro **Binomial Heap** queda
+
+![alt image](binomialheapk1_12.svg)
+
+Para ver más claramente la utilidad del vector de punteros vamos a realizar la operación de unión entre el árbol binomial anterior y otro nuevo con los valores 3 y 4.
+
+![alt image](binomialk1_34.svg)
+
+**Unión de los dos árboles**
+
+![alt image](binomialk2_1234.svg)
+
+Nos damos cuenta de que nuestra implementación es eficiente, ya que para unir dos árboles solo hizo falta hacer referencia a un árbol ya existente.
+
+El estado actual de nuestro **Binomial Heap** es
+
+![alt image](binomialheapk2_1234.svg)
 
 ### Rendimiento Teórico Binomial Heap
 
+La siguiente tabla describe la complejidad temporal en notación Big O de las operaciones soportadas por Binary Heap.
 
-Describir las características principales de los tipos de heaps seleccionados.
-• Describir las decisiones de implementación más importantes.
-• Plantear varias hipótesis (al menos 2, máximo 4) sobre el rendimiento de las estructuras a
-comparar en escenarios específicos. Por ejemplo, “la estructura X es más rápida en la operación
-OP que la estructura Y cuando los datos cumplen cierta característica C”, “la estructura X
-ocupará más espacio que la estructura Y”, etc.
-• Diseñar un experimento que permita contrastar cada hipótesis.
-• Ejecutar los experimentos y explicar los resultados obtenidos.
+| Operación | Promedio | Peor Caso |
+|--|--|--|
+| Buscar | $O(n)$ | $O(n)$ |
+| Insertar | $O(1)$ | $O(log(n))$ |
+| min(max) | $O(1)$ | $O(log(1))$ |
+| Eliminar min(max) | $O(log(n))$ | $O(log(n))$ |
+| Unión | $O(n+m)$ | $O(n+m)$ |
+
+Donde n y m representan el número de nodos de cada binary heap que forma parte en la operación de unión.
