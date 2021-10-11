@@ -15,7 +15,6 @@ class binomial_heap
 private:
     vector<node*>* _arrRoots;
     void _insertSpecific(int, node*);
-    vector<node*>* _getRoots();
 public:
     binomial_heap();
     ~binomial_heap();
@@ -23,6 +22,7 @@ public:
     int find();
     void merge(binomial_heap*);
     void printBinomialH();
+    vector<node*>* _get_PtrToRoots();
 };
 
 #endif

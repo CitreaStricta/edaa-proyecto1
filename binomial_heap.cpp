@@ -12,8 +12,6 @@ binomial_heap::~binomial_heap()
     // el delete de esto va a ser una real paja
 }
 
-
-
 // funcion recursiva para insertar elementos
 void binomial_heap::_insertSpecific(int indice, node* handlerPtr)
 {
@@ -74,6 +72,7 @@ int binomial_heap::find()
     auto it = _arrRoots->begin();
     auto itE = _arrRoots->end();
     int min = INT32_MAX;
+    // no puedo decir "min = (*it)->val" porque el 1er puntero puede estar apuntando a nullptr
     while (it != itE)
     {
         if ((*it) != nullptr && (*it)->val < min)
@@ -88,7 +87,18 @@ int binomial_heap::find()
 // merge de los dos heaps en heap1
 void binomial_heap::merge(binomial_heap* bin2)
 {
-    auto it1 = bin2->_getRoots();
+    node* handlerPtr = nullptr;
+    auto binomial_ToMerge = bin2->_get_PtrToRoots();
+
+    for (int i = 0; i < binomial_ToMerge->size(); i++)
+    {
+        if (binomial_ToMerge->at(i) != nullptr)
+        {
+            handlerPtr = binomial_ToMerge->at(i);
+            binomial_ToMerge->at(i) = nullptr;
+            _insertSpecific(i, handlerPtr);
+        }
+    }
     
 }
 
@@ -129,7 +139,7 @@ void binomial_heap::printBinomialH()
     _printHeap(_arrRoots);
 }
 
-vector<node*>* binomial_heap::_getRoots()
+vector<node*>* binomial_heap::_get_PtrToRoots()
 {
     return _arrRoots;
 }

@@ -8,7 +8,7 @@
 using namespace std;
 
 struct fiNode{
-	vector<int> tree;
+	vector<int> tree; //arbol del nodo actual
 	struct fiNode *sig;
 	struct fiNode *prev;
 };
@@ -19,7 +19,7 @@ class FibonacciHeap{
 		~FibonacciHeap();
 		void insert(const int num);
 		int searchMin();
-		FibonacciHeap* merge(FibonacciHeap &f1);
+		void merge(FibonacciHeap &f1);
 		struct fiNode* getList();
 	private:
 		void heapify(struct fiNode x);

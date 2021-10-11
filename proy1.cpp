@@ -8,7 +8,7 @@ using namespace std;
 int main()
 {
     /*  Pruebas binary  */
-    cout << "elmankk la maska" << endl;
+    cout << "BINARY HEAP" << endl;
     BinaryHeap* bh1 = new BinaryHeap();
     BinaryHeap* bh2 = new BinaryHeap();
     BinaryHeap* elmergiado = new BinaryHeap();
@@ -49,10 +49,12 @@ int main()
 
 
     /*  Pruebas binomial  */
+    cout << "-----------------"<< endl;
+    cout << "BINOMIAL HEAP"<< endl;
     srand(time(NULL));
     binomial_heap* bnmlh1 = new binomial_heap();
 
-    for (int i = 0; i < 63; i++)
+    for (int i = 0; i < 15; i++)
     {
         bnmlh1->insert(rand() % 1000);
     }
@@ -62,31 +64,40 @@ int main()
 
     binomial_heap* bnmlh2 = new binomial_heap();
 
-    for (int i = 0; i < 63; i++)
+    for (int i = 0; i < 16; i++)
     {
         bnmlh2->insert(rand() % 1000);
     }
     bnmlh2->printBinomialH();
 
+    cout << "ejecucion del merge" << endl;
+
     bnmlh1->merge(bnmlh2);
 
+    bnmlh1->printBinomialH();
+    bnmlh2->printBinomialH();
+    
+    cout << "El menor valor es: " << bnmlh1->find() << endl;
     cout << "El menor valor es: " << bnmlh2->find() << endl;
     //return 0;
 
     
 
     /*  Pruebas fibonacci  */
+    cout << "-----------------"<< endl;
+    cout << "FIBONACCI HEAP"<< endl;
     FibonacciHeap *f1 = new FibonacciHeap();
+    FibonacciHeap *f2 = new FibonacciHeap();
 
 	f1->insert(5);
 	f1->insert(8);
 	f1->insert(10);
 	f1->insert(14);
 	f1->insert(28);
-	f1->insert(9);
-	f1->insert(3);
-	f1->insert(11);
-	f1->insert(12);
+	f2->insert(9);
+	f2->insert(3);
+	f2->insert(11);
+	f2->insert(12);
 
 	struct fiNode* lista = f1->getList();
 	for(int i=0; i<15; i++){
@@ -94,7 +105,23 @@ int main()
 		lista = lista->sig;
 	}
 	cout<<endl;
-	cout<<f1->searchMin()<<endl;
+
+    lista = f2->getList();
+	for(int i=0; i<15; i++){
+		cout<<lista->tree[0]<<" ";
+		lista = lista->sig;
+	}
+	cout<<endl;
+
+    f1->merge(*f2);
+
+    lista = f1->getList();
+	for(int i=0; i<15; i++){
+		cout<<lista->tree[0]<<" ";
+		lista = lista->sig;
+	}
+	cout<<endl;
+	//cout<<f1->searchMin()<<endl;
 
     return 0;
 }
