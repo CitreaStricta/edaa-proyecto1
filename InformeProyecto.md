@@ -23,14 +23,13 @@ Para implementar un binary heap uilizamos un arreglo. Al ser binary heap siempre
 
 ### Rendimiento teórico Binary Heap
 
-La siguiente tabla describe la complejidad temporal en notación Big O de las operaciones soportadas por Binary Heap.
+La siguiente tabla describe la complejidad temporal en notación Big O de algunas de las operaciones soportadas por Binary Heap.
 
 | Operación | Promedio | Peor Caso |
 |--|--|--|
-| Buscar | $O(n)$ | $O(n)$ |
 | Insertar | $O(1)$ | $O(log(n))$ |
 | min(max) | $O(1)$ | $O(log(1))$ |
-| Eliminar min(max) | $O(log(n))$ | $O(log(n))$ |
+| Eliminar| $O(log(n))$ | $O(log(n))$ |
 | Unión | $O(n+m)$ | $O(n+m)$ |
 
 Donde n y m representan el número de nodos de cada binary heap que forma parte en la operación de unión.
@@ -48,6 +47,7 @@ Notemos además que podemos construir un binomial tree de orden k a partir de do
 
 ![alt image](200px-Binomial_heap_merge1.svg.png "Unión de dos Binomial Heap")
 
+Binomial Heap resulta de utilidad en los casos en que sea necesario unir varias colas de prioridad y con relativa frecuencia. En estos casos binary heap no es adecuado.
 ### Implementación Binomial Heap
 
 Para implementar binomial heap utilizando el menor espacio posible, creamos la estructura `node`. Cada `node` se compone de su propio valor y de un vector con las referencias a los `nodes` hijos. Esto nos permite definir recursivamente los árboles binomiales independiente del orden que tengan. Como es lógico, para representar el Binomial Heap creamos un vector con referencias a cada uno de estos árboles. El índice de cada objeto de este vector se corresponde con el grado del árbol binomial. 
@@ -92,14 +92,34 @@ El estado actual de nuestro **Binomial Heap** es
 
 ### Rendimiento Teórico Binomial Heap
 
-La siguiente tabla describe la complejidad temporal en notación Big O de las operaciones soportadas por Binary Heap.
+La siguiente tabla describe la complejidad temporal en notación Big O de algunas de las operaciones soportadas por Binomial Heap.
 
 | Operación | Promedio | Peor Caso |
 |--|--|--|
-| Buscar | $O(n)$ | $O(n)$ |
 | Insertar | $O(1)$ | $O(log(n))$ |
-| min(max) | $O(1)$ | $O(log(1))$ |
-| Eliminar min(max) | $O(log(n))$ | $O(log(n))$ |
-| Unión | $O(n+m)$ | $O(n+m)$ |
+| min(max) | $O(1)$ | $O(log(n))$ |
+| Eliminar | $O(log(n))$ | $O(log(n))$ |
+| Unión | $O(log(n)+log(m))$ | $O(log(n)+log(m))$ |
 
 Donde n y m representan el número de nodos de cada binary heap que forma parte en la operación de unión.
+
+## Fibonacci Heap
+
+Al ser una estructura que implementa el ADT "mergeable heap" se puede aplicar para muchos de los casos que ya hemos descrito, sin embargo un Fibonacci Heap tiene como ventaja que algunas de sus operaciones se ejecutan en tiempo constante amortizado.
+Si lo comparamos con Binomial Heap, Fibonacci Heap tiene una estructura más relajada. La forma de los árboles no es estricta y algunas de sus operaciones se ejecutan de manera perezosa.
+
+### Implementación Fibonacci Heap
+
+
+
+### Rendimiento Teórico Fibonacci Heap
+
+La siguiente tabla describe la complejidad temporal en notación Big O de algunas de las operaciones soportadas por Fibonacci Heap.
+
+| Operación | Amortizado |
+|--|--|
+| Insertar | $O(1)$ | 
+| min(max) | $O(1)$ | 
+| Eliminar | $O(log(n))$ |
+| Unión | $O(1)$ |
+
