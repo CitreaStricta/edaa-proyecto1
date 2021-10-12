@@ -10,7 +10,7 @@ class BinaryHeap{
         void insert (const int num);
         int searchMin();
 		vector<int> getArray();
-        BinaryHeap* merge (BinaryHeap &h1);
+        void merge (BinaryHeap &h1);
     private:
         vector<int> vec;		
 };

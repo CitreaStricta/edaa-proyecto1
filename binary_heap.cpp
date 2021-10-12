@@ -35,34 +35,15 @@ vector<int> BinaryHeap::getArray()
     return vec;
 }
 
-BinaryHeap *BinaryHeap::merge(BinaryHeap &h1)
+void BinaryHeap::merge(BinaryHeap &h1)
 {
-    vector<int> v1 = this->getArray();
-    vector<int> v2 = h1.getArray();
-    vector<int> newVec = v1;
+    vector<int> v1 = this->vec;
+    vector<int> v2 = h1.getArray();    
 
-    newVec.insert(newVec.end(), v2.begin(), v2.end());
-    BinaryHeap *merged = new BinaryHeap();
-    while (!newVec.empty())
+    while (!v2.empty())
     {
-        merged->insert(newVec.back());
-        newVec.pop_back();
+        this->insert(v2.back());
+        v2.pop_back();
     }
     return merged;
 }
-
-// void *BinaryHeap::merge(BinaryHeap &h1)
-// {
-//     vector<int> v1 = this->getArray();
-//     vector<int> v2 = h1.getArray();
-//     vector<int> newVec = v1;
-
-//     newVec.insert(newVec.end(), v2.begin(), v2.end());
-//     BinaryHeap *merged = new BinaryHeap();
-//     while (!newVec.empty())
-//     {
-//         merged->insert(newVec.back());
-//         newVec.pop_back();
-//     }
-//     return merged;
-// }
