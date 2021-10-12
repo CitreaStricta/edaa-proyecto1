@@ -110,7 +110,33 @@ Si lo comparamos con Binomial Heap, Fibonacci Heap tiene una estructura más rel
 
 ### Implementación Fibonacci Heap
 
+Implementamos Fibonacci Heap mediante listas doblemente enlazadas circulares. Las raíces están en organizadas de esa forma y en cada árbol los hijos de un mismo nivel también. En Fibonacci Heap mantenemos un puntero al menor y lo vamos actualizando conforme vamos ejecutando operaciones sobre la estructura. La estructura `fiNode` sirve como base para nuestra implementación de Fibonacci Heap
 
+```c++
+struct fiNode{
+	int data;
+	struct fiNode *sig;
+	struct fiNode *prev;
+	struct fiNode *hijo;
+	struct fiNode *padre;
+};
+```
+
+La siguiente imagen muestra nuestra implementación.
+
+![alt image](fibonacciheap.svg "Fibonacci Heap")
+
+La inserción se ejecuta en tiempo constante, ya que basta solo con agregar un nodo más a la raíz y actualizar el puntero al mínimo, si es necesario.
+
+![alt image](fibonacciheapinsercion.svg "Inserción Fibonacci Heap")
+
+Cuando quitamos el mínimo, lo haremos en dos pasos. Primero retornamos el mínimo, pues tenemos acceso directo a él mediante un puntero. 
+
+![alt image](fibonacciheapdelete1.svg "Fibonacci Heap Delete")
+
+Segundo, debemos encontrar un nuevo mínimo. Para esto construimos nuevos Binomial Heap con los nodos restantes:
+
+![alt image](fibonacciheapdelete2.svg "Fibonacci Heap Delete continuacion")
 
 ### Rendimiento Teórico Fibonacci Heap
 
