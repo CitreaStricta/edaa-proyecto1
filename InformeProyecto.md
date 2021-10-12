@@ -37,9 +37,6 @@ Donde n y m representan el número de nodos de cada binary heap que forma parte 
 
 ## Binomial Heap
 
-<<<<<<< HEAD
-Es una estructura de datos con multiples árboles binomiales que cumplen con la **Propiedad de Heap**: En un max heap para cualquier nodo C, si P es padre de C, P es mayor o igual a C. En un min heap P sería menor o igual a C. Su utilidad está en la implementación de colas prioridad eficientes. Su eficiencia es tal que comunmente las colas de prioridad son llamadas heap, independiente de cual sea la estructura de datos implementada. Adicionalmente a la propiedad de heap, un binary heap debe cumplir con requisito de forma: debe ser un árbol binario completo. Como es de suponer, encontrar el mínimo (o máximo, según sea el caso) toma tiempo constante. Insertar y borrar son $O(log(n))$ y la unión $O(n)$
-=======
 De manera similar a Binary Heap, un Binomial Heap es una estructura de datos que actúa como cola de prioridad y que además permite la unión de pares de heaps. Análogo a binary heap que toma la forma de un árbol binario completo, un binomial heap toma la forma de otro tipo de árbol, un binomial tree. Otra gran diferencia es que un Binomial Heap es un bosque de binomial trees y está definido de manera recursiva:
 
 * Un binomial tree de orden 0 es un único nodo
@@ -50,7 +47,6 @@ De manera similar a Binary Heap, un Binomial Heap es una estructura de datos que
 Notemos además que podemos construir un binomial tree de orden k a partir de dos binomial tree de orden k-1. Simplemente tenemos que agregar un de los árboles como el hijo izquierdo de la raíz del otro árbol. Esta propiedad resulta de vital importancia a la hora de implementar la operación de unión.
 
 ![alt image](200px-Binomial_heap_merge1.svg.png "Unión de dos Binomial Heap")
->>>>>>> d7828611deb3450db5f68734b509119e36f54e51
 
 ### Implementación Binomial Heap
 

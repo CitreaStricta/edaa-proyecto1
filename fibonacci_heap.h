@@ -1,16 +1,18 @@
-#ifndef FIBONACCI_HEAP
-#define FIBONACCI_HEAP
 #include <string>
 #include <algorithm>
 #include <vector>
+#ifndef FIBONACCI_HEAP
+#define FIBONACCI_HEAP
 
-	
+
 using namespace std;
 
 struct fiNode{
-	vector<int> tree; //arbol del nodo actual
+	int data;
 	struct fiNode *sig;
 	struct fiNode *prev;
+	struct fiNode *hijo;
+	struct fiNode *padre;
 };
 
 class FibonacciHeap{
@@ -22,10 +24,9 @@ class FibonacciHeap{
 		void merge(FibonacciHeap* f1);
 		struct fiNode* getList();
 	private:
-		fiNode** _getList();
 		void heapify(struct fiNode x);
+		fiNode** _getList();
 		vector<int> vec;
-		int roots;
 		struct fiNode* min;
 };
 
