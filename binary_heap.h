@@ -12,6 +12,7 @@ class BinaryHeap{
 		vector<int> getArray();
         void merge (BinaryHeap &h1);
     private:
+        void heapify(vector<int> &v, int index);
         vector<int> vec;		
 };
 

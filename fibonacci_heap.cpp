@@ -59,6 +59,11 @@ void FibonacciHeap::insert(const int num){
 }
 
 int FibonacciHeap::searchMin(){
+	if(min == nullptr)
+	{
+		cout << "no hay elementos el en heap" << endl;
+		return -1;
+	}
 	return min->data;
 }
 

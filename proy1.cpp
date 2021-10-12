@@ -7,129 +7,105 @@ using namespace std;
 
 int main()
 {
-    /*  Pruebas binary  */
-//     cout << "BINARY HEAP" << endl;
-//     BinaryHeap* bh1 = new BinaryHeap();
-//     BinaryHeap* bh2 = new BinaryHeap();
-//     BinaryHeap* elmergiado = new BinaryHeap();
-//     vector<int> hey;
-//     bh1->insert(5);
-//     bh1->insert(9);
-//     bh1->insert(4);
-//     bh1->insert(15);
-//     bh1->insert(18);
-//     bh2->insert(1);
-//     bh2->insert(13);
-//     bh2->insert(11);
-//     bh2->insert(7);
-//     bh2->insert(3);
-    
-//     cout << "hola" << endl;
-
-//     hey = bh1->getArray();
-//     for(int i=0; i<hey.size(); i++)
-//         cout<<hey[i]<<" ";
-//     cout<<endl;
-
-//     hey = bh2->getArray();
-//     for(int i=0; i<hey.size(); i++)
-//         cout<<hey[i]<<" ";
-//     cout<<endl;
-
-//     cerr<<"antes de merge"<<endl;
-//     elmergiado = bh1->merge(*bh2);
-//     cerr<<"despues de merge"<<endl;
-// // hola error abajo
-//     hey = elmergiado->getArray();
-//     for(int i=0; i<hey.size(); i++)
-//         cout<<hey[i]<<" ";
-//     cout<<endl;
-//     //return 0;
-
-
-
-    /*  Pruebas binomial  */
-    cout << "-----------------"<< endl;
-    cout << "BINOMIAL HEAP"<< endl;
+    cout << setprecision(10);
     srand(time(NULL));
-    binomial_heap* bnmlh1 = new binomial_heap();
+    int rep = 20;
+    double duracion1, duracion2;
+    double time;
+    int constante = 16383;
+    clock_t start;
+    for (int n = constante; n <= constante*20; n += constante)
+    { // preparacion
+        // cout << "datos: " << n << endl;
+        // auto binary1 = new BinaryHeap();
+        // auto binary2 = new BinaryHeap();
+        
+        // auto binomial1 = new binomial_heap();
+        // auto binomial2 = new binomial_heap();
+        
+        // auto fibonacci1 = new FibonacciHeap();
+        // auto fibonacci2 = new FibonacciHeap();
 
-    for (int i = 0; i < 15; i++)
-    {
-        bnmlh1->insert(rand() % 1000);
+        auto vecAux1 = vector<int>();
+        auto vecAux2 = vector<int>();
+        for (int i = 0; i < n; i++)
+        {
+            int data = rand() % 1000;
+            vecAux1.push_back(data);
+        }
+        
+        for (int i = 0; i < n; i++)
+        {
+            int data = rand() % 1000;
+            vecAux2.push_back(data);
+        }
+        
+        for (int i = 0; i < rep; i++)
+        {
+            auto binary1 = new BinaryHeap();
+            auto binary2 = new BinaryHeap();
+
+            auto binomial1 = new binomial_heap();
+            auto binomial2 = new binomial_heap();
+            int vecSize1 = vecAux1.size();
+
+            for (int j = 0; j < vecSize1; j++)
+            {
+                binomial1->insert(vecAux1.at(j));
+                binary1->insert(vecAux1.at(j));
+            }
+            auto vecSize2 = vecAux2.size();
+
+            for (int j = 0; j < vecSize2; j++)
+            {
+                binomial2->insert(vecAux2.at(j));
+                binary2->insert(vecAux2.at(j));
+            }
+            start = clock();
+            binary1->merge(*binary2);
+            duracion1 += (double)(clock()-start)/CLOCKS_PER_SEC;
+
+            start = clock();
+            binomial1->merge(binomial2);
+            duracion2 += (double)(clock()-start)/CLOCKS_PER_SEC;
+
+            delete binary1;
+            delete binomial1;
+            delete binary2;
+            delete binomial2;
+        }
+        //double duracion1 = (double)(clock()-start)/CLOCKS_PER_SEC/rep;
+
+        // cout << "merge binary; " << setprecision(10) << fixed <<  duracion << "; " << endl;
+
+        // start = clock();
+        // for (int i = 0; i < rep; i++)
+        // {
+        //     binomial1->merge(binomial2);
+        // }
+        // duracion = (double)(clock()-start)/CLOCKS_PER_SEC/rep;
+
+        cout << setprecision(10) << fixed << n << "," <<  duracion1/(double)rep << "," <<  duracion2/(double)rep << endl;
+        //n = n+1;
+
+//-----------------------------------------------------------------------------
+
+        // delete binary1;
+        // delete binomial1;
+        // delete fibonacci1;
+        // delete binary2;
+        // delete binomial2;
+        // delete fibonacci2;
     }
-    bnmlh1->printBinomialH();
-
-    cout << "El menor valor es: " << bnmlh1->find() << endl;
-
-    binomial_heap* bnmlh2 = new binomial_heap();
-
-    for (int i = 0; i < 16; i++)
-    {
-        bnmlh2->insert(rand() % 1000);
-    }
-    bnmlh2->printBinomialH();
-
-    cout << "ejecucion del merge" << endl;
-
-    bnmlh1->merge(bnmlh2);
-
-    bnmlh1->printBinomialH();
-    bnmlh2->printBinomialH();
-    
-    cout << "El menor valor es: " << bnmlh1->find() << endl;
-    cout << "El menor valor es: " << bnmlh2->find() << endl;
-    delete bnmlh1;
-    delete bnmlh2;
-    return 0;
-
-    
-
-    /*  Pruebas fibonacci  */
-    cout << "-----------------"<< endl;
-    cout << "FIBONACCI HEAP"<< endl;
-    FibonacciHeap *f1 = new FibonacciHeap();
-    FibonacciHeap *f2 = new FibonacciHeap();
-
-	f1->insert(5);
-	f1->insert(8);
-	f1->insert(10);
-	f1->insert(14);
-	f1->insert(28);
-	f2->insert(9);
-	f2->insert(3);
-	f2->insert(11);
-	f2->insert(12);
-
-	auto lista = f1->getList();
-	for(int i=0; i<15; i++){
-		cout<<lista->tree[0]<<" ";
-		lista = lista->sig;
-	}
-	cout<<endl;
-
-    lista = f2->getList();
-	for(int i=0; i<15; i++){
-		cout<<lista->tree[0]<<" ";
-		lista = lista->sig;
-	}
-	cout<<endl;
-    cout<<f1->searchMin()<<endl;
-    f1->merge(f2);
-    cout<<f1->searchMin()<<endl;
-    cout<<f2->searchMin()<<endl;
-
-    // lista = f2->getList();
-	// for(int i=0; i<15; i++){
-	// 	cout<<lista->tree[0]<<" ";
-	// 	lista = lista->sig;
-	// }
-
-	cout<<endl;
-    cout<<f1->searchMin()<<endl;
-    cout<<f2->searchMin()<<endl;
-
-    delete f1;
-    delete f2;
     return 0;
 }
+
+
+/*
+
+
+La operacion de merge es mas rapida en Binomial Heap que en Binary Heap
+
+La operacion de merge del binomial toma mas tiempo que el binary cuando los datos totales son 2^i-1 (i cualquier numero entero)
+
+*/

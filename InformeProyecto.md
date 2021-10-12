@@ -110,6 +110,11 @@ Si lo comparamos con Binomial Heap, Fibonacci Heap tiene una estructura más rel
 
 ### Implementación Fibonacci Heap
 
+Implementamos Fibonacci Heap mediante listas doblemente enlazadas circulares. Las raices estan en organizadas de esa forma y en cada árbol los hijos de un mismo nivel también. En Fibonacci Heap mantenemos un puntero al menor y lo vamos actualizando conforme vamos ejecutando operaciones sobre la estructura.
+
+La siguiente imagen muestra nuestra implementación.
+
+![alt image]()
 
 
 ### Rendimiento Teórico Fibonacci Heap
