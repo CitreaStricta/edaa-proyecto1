@@ -1,0 +1,60 @@
+datos: 10000
+merge binary; 0.0017662500; 
+merge binomial; 0.0000006000; 
+datos: 20000
+merge binary; 0.0029534500; 
+merge binomial; 0.0000004500; 
+datos: 30000
+merge binary; 0.0045033500; 
+merge binomial; 0.0000007000; 
+datos: 40000
+merge binary; 0.0053182000; 
+merge binomial; 0.0000050000; 
+datos: 50000
+merge binary; 0.0064097000; 
+merge binomial; 0.0000006500; 
+datos: 60000
+merge binary; 0.0077949500; 
+merge binomial; 0.0000006500; 
+datos: 70000
+merge binary; 0.0087857500; 
+merge binomial; 0.0000007000; 
+datos: 80000
+merge binary; 0.0104130500; 
+merge binomial; 0.0000005000; 
+datos: 90000
+merge binary; 0.0117444000; 
+merge binomial; 0.0000007500; 
+datos: 100000
+merge binary; 0.0119578500; 
+merge binomial; 0.0000006000; 
+datos: 110000
+merge binary; 0.0135546500; 
+merge binomial; 0.0000007500; 
+datos: 120000
+merge binary; 0.0148967500; 
+merge binomial; 0.0000006000; 
+datos: 130000
+merge binary; 0.0153514500; 
+merge binomial; 0.0000007500; 
+datos: 140000
+merge binary; 0.0168397500; 
+merge binomial; 0.0000005000; 
+datos: 150000
+merge binary; 0.0175869500; 
+merge binomial; 0.0000007000; 
+datos: 160000
+merge binary; 0.0189699000; 
+merge binomial; 0.0000006000; 
+datos: 170000
+merge binary; 0.0207791500; 
+merge binomial; 0.0000006500; 
+datos: 180000
+merge binary; 0.0207263000; 
+merge binomial; 0.0000007000; 
+datos: 190000
+merge binary; 0.0217828000; 
+merge binomial; 0.0000007500; 
+datos: 200000
+merge binary; 0.0235726000; 
+merge binomial; 0.0000007000; 
